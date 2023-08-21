@@ -2,3 +2,5 @@ CMakeLists.txt
 db_project2.cpp
 main.cpp
 111111.cpp
+/cmake-build-debug
+.idea
