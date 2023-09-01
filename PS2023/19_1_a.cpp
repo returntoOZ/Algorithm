@@ -14,7 +14,7 @@ int main(){
         cin >> N;
 
         int total = 0; // total : 누적 시간
-        int cwt, crt;// cwt : 현재 waiting time, crt : 현재 response time
+        int cwt;// cwt : 현재 waiting time
         int twt = 0, trt = 0; // twt : 누적 waiting time, trt : 누적 response time
 
         for(int i=0; i<N; i++){
