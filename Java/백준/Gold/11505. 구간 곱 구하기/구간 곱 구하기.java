@@ -39,8 +39,13 @@ public class Main {
         M = Integer.parseInt(st.nextToken());
         K = Integer.parseInt(st.nextToken());
 
+        int leafCount = 1;
+        while (leafCount < N) {
+            leafCount <<= 1;
+        }
+
         arr = new long[N];
-        segTree = new long[N*4];
+        segTree = new long[leafCount * 2];
 
         for (int i = 0; i < N; i++) {
             arr[i] = Long.parseLong(br.readLine());
