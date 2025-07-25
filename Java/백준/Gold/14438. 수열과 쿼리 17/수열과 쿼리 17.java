@@ -51,9 +51,6 @@ public class Main {
         }
 
         init(0, N-1, 1);
-        for(int i=0; i<treeSize; i++){
-
-        }
 
         M = Integer.parseInt(br.readLine());
         for(int i=0; i<M; i++){
