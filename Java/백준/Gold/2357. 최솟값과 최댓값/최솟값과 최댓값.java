@@ -41,9 +41,16 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
+        int treeSize = 1;
+
+        while(treeSize < N){
+            treeSize <<= 1;
+        }
+        treeSize *= 2;
+
         arr = new int[N];
-        minTree = new int[4*N];
-        maxTree = new int[4*N];
+        minTree = new int[treeSize];
+        maxTree = new int[treeSize];
 
         for(int i=0;i<N;i++){
             arr[i] = Integer.parseInt(br.readLine());
