@@ -15,14 +15,11 @@ public class Main {
     static int A,B;
 
     static void bfs(int start){
-        HashMap<Long, Integer> map = new HashMap<>(); // 중복 체크용 map
         Queue<node> q = new ArrayDeque<>();
         q.offer(new node(start, 1));
 
         while(!q.isEmpty()){
             node cur = q.poll();
-            if(map.containsKey(cur.next)) continue;
-            map.put(cur.next, map.getOrDefault(cur.next, 0) + 1);
 
             long first = cur.next * 2;
             if(first < B){
