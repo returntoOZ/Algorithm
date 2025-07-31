@@ -41,6 +41,7 @@ public class Main {
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
+        StringBuilder sb = new StringBuilder();
 
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
@@ -58,9 +59,11 @@ public class Main {
         rotate(0,0,M,N);
         for(int i=0; i<N; i++){
             for(int j=0; j<M; j++){
-                System.out.print(arr[i][j] + " ");
+                sb.append(arr[i][j]).append(" ");
             }
-            System.out.println();
+            sb.append("\n");
         }
+
+        System.out.print(sb);
     }
 }
