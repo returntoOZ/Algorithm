@@ -25,10 +25,24 @@ public class Main {
                 q.offer(nxt);
                 flag = false;
             }
-            
+
             if(flag) cnt++;
         }
     }
+
+    static void dfs(int cur){
+        if(cur == del) return;
+
+        int realChild = 0;
+        for(int nxt: tree.get(cur)){
+            if(nxt == del) continue;
+            dfs(nxt);
+            realChild++;
+        }
+
+        if(realChild == 0) cnt++;
+    }
+    
     public static void main(String[] args)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         N = Integer.parseInt(br.readLine());
@@ -57,7 +71,7 @@ public class Main {
             return;
         }
 
-        bfs(start);
+        dfs(start);
         System.out.print(cnt);
     }
 }
