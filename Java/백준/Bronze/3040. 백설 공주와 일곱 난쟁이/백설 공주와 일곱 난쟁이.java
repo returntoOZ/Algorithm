@@ -27,6 +27,26 @@ public class Main {
         }
     }
 
+    static void powerset(int cnt, int idx, int sum){
+        if(cnt == 7){
+            if(sum == 100){
+                for(int i=0; i<9; i++){
+                    if(check[i]) sb.append(arr[i]).append("\n");
+                }
+                System.out.print(sb);
+                return;
+            }
+
+        }
+
+        if(idx >= 9) return;
+
+        check[idx] = true;
+        powerset(cnt+1, idx+1, sum + arr[idx]);
+        check[idx] = false;
+        powerset(cnt, idx+1, sum);
+    }
+
     public static void main(String[] args)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
@@ -42,9 +62,10 @@ public class Main {
 
         // 1번 풀이
         // 9개 중에 2개 뽑기
-        combination(0,0, 0);
-        System.out.print(sb);
+//        combination(0,0, 0);
+//        System.out.print(sb);
         // 2번 풀이
-
+        // 7개짜리 부분 집합 만들기
+        powerset(0,0, 0);
     }
 }
