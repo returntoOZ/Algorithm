@@ -56,6 +56,26 @@ public class Main {
             graph.get(b).add(a);
         }
 
-        System.out.print(bfs(1));
+//        System.out.print(bfs(1));
+
+        Arrays.fill(check, false);
+        Queue<node> q = new ArrayDeque<>();
+        q.offer(new node(1, 0));
+        check[1] = true;
+
+        int cnt = 0;
+        while(!q.isEmpty()){
+            node cur = q.poll();
+
+            for(int nxt : graph.get(cur.v)){
+                if(check[nxt]) continue;
+                if(cur.w + 1 > 2) continue;
+                check[nxt] = true;
+                q.offer(new node(nxt, cur.w + 1));
+                cnt++;
+            }
+        }
+
+        System.out.print(cnt);
     }
 }
