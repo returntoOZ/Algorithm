@@ -12,21 +12,19 @@ public class Main {
     static class Node{
         int x;
         int y;
-        int w;
 
-        public Node(int x, int y, int w){
+        public Node(int x, int y){
             this.x = x;
             this.y = y;
-            this.w = w;
         }
     }
 
     static void bfs(int x, int y){
         dp[x][y] = 0;
-        PriorityQueue<Node> q = new PriorityQueue<>(
-                (o1, o2) -> o1.w - o2.w
+        Queue<Node> q = new ArrayDeque<>(
+
         );
-        q.offer(new Node(x,y, dp[x][y]));
+        q.offer(new Node(x,y));
 
         while(!q.isEmpty()){
             Node cur = q.poll();
@@ -45,9 +43,9 @@ public class Main {
 
                     if(dp[nx][ny] < dp[cur.x][cur.y] + 1) break;
                     if(dp[nx][ny] == dp[cur.x][cur.y] + 1) continue;
-                    
+
                     dp[nx][ny] = dp[cur.x][cur.y] + 1;
-                    q.add(new Node(nx,ny, dp[nx][ny]));
+                    q.add(new Node(nx,ny));
                 }
             }
         }
