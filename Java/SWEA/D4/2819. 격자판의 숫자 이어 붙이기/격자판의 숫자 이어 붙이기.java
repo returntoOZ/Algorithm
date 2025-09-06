@@ -8,19 +8,19 @@ public class Solution {
 
     static char[][] map;
     static char[] arr;
-    static Set<Integer> set;
+    static Set<String> set;
     // 4^6 = 2^12 = 4096    4096 * 2^4 = 2^16 대략 6.4만
     static void bt(int x, int y, int cnt){ // cnt 시작은 1
-        if(cnt == 7){
-            String st = "";
+        arr[cnt] = map[x][y];
+
+        if(cnt == 6){
+            StringBuilder sb = new StringBuilder(7);
             for(int i=0; i<7; i++){
-                st += arr[i];
+                sb.append(arr[i]);
             }
-            set.add(Integer.valueOf(st));
+            set.add(sb.toString());
             return;
         }
-
-        arr[cnt] = map[x][y];
 
         for(int i=0; i<4; i++){
             int nx = x + dx[i];
