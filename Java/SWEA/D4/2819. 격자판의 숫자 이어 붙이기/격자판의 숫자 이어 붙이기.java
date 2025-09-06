@@ -6,19 +6,12 @@ public class Solution {
     static int[] dx = {1,0,-1,0};
     static int[] dy = {0,1,0,-1};
 
-    static char[][] map;
-    static char[] arr;
-    static Set<String> set;
+    static int[][] map;
+    static Set<Integer> set;
     // 4^6 = 2^12 = 4096    4096 * 2^4 = 2^16 대략 6.4만
-    static void bt(int x, int y, int cnt){ // cnt 시작은 1
-        arr[cnt] = map[x][y];
-
+    static void bt(int x, int y, int cnt, int sum){ // cnt 시작은 1
         if(cnt == 6){
-            StringBuilder sb = new StringBuilder(7);
-            for(int i=0; i<7; i++){
-                sb.append(arr[i]);
-            }
-            set.add(sb.toString());
+            set.add(sum);
             return;
         }
 
@@ -28,7 +21,7 @@ public class Solution {
 
             if(nx < 0 || nx >= 4 || ny < 0 || ny >= 4) continue;
 
-            bt(nx, ny, cnt+1);
+            bt(nx, ny, cnt+1, sum*10 + map[nx][ny]);
         }
     }
     public static void main(String[] args)throws IOException{
@@ -37,8 +30,7 @@ public class Solution {
         T = Integer.parseInt(br.readLine());
 
         while(T-- >0){
-            map = new char[4][4];
-            arr = new char[7];
+            map = new int[4][4];
             set = new HashSet<>();
 
             for(int i=0; i<4; i++){
@@ -50,7 +42,7 @@ public class Solution {
 
             for(int i=0; i<4; i++){
                 for(int j=0; j<4; j++){
-                    bt(i,j,0);
+                    bt(i,j,0, map[i][j]);
                 }
             }
 
