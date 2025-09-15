@@ -2,76 +2,71 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static int[] dist;
-    static boolean[] check;
-
-    static List<List<Node>> graph;
-
-    static class Node{
-        int to;
-        int weight;
-
-        public Node(int to, int weight) {
-            this.to = to;
-            this.weight = weight;
-        }
-    }
-
-    static void dijkstra(int st) {
-        Arrays.fill(dist, Integer.MAX_VALUE);
-        Arrays.fill(check, false);
-        dist[st] = 0;
-
-        PriorityQueue<Node> pq = new PriorityQueue<>(
-                (o1, o2) -> Integer.compare(o1.weight, o2.weight)
-        );
-        pq.add(new Node(st, 0));
-
-        while(!pq.isEmpty()) {
-            Node cur = pq.poll();
-            int node = cur.to;
-
-            if(check[node]) continue; // 방문한 곳이면 skip
-            check[node] = true;
-
-            for(Node n : graph.get(node)) {
-                int v = n.to, w = n.weight;
-                if(!check[v] && dist[v] > dist[node] + w) {
-                    dist[v] = dist[node] + w;
-                    pq.add(new Node(v, dist[v]));
-                }
-            }
-        }
-    }
-    
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        int N = Integer.parseInt(br.readLine());
-        int M = Integer.parseInt(br.readLine());
-
-        graph = new ArrayList<>(N+1);
-        for (int i = 0; i <= N; i++) {
-            graph.add(new ArrayList<>());
-        }
-
-        dist = new int[N+1]; // 거리 업데이트
-        check = new boolean[N+1]; // 방문 여부 체크
-        
-        StringTokenizer st;
-        for(int i = 0; i < M; i++) { // a -> b로 이동할 때, 가중치 w
-            st = new StringTokenizer(br.readLine());
-            int a = Integer.parseInt(st.nextToken());
-            int b = Integer.parseInt(st.nextToken());
-            int w = Integer.parseInt(st.nextToken());
-
-            graph.get(a).add(new Node(b, w));
-        }
-        
-        st = new StringTokenizer(br.readLine());
-        int start = Integer.parseInt(st.nextToken());
-        int end = Integer.parseInt(st.nextToken());
-
-        dijkstra(start);
-        System.out.println(dist[end]);
-    }
+	static int N, M, start, end;
+	static int[] dist; // 1번부터 N번
+	static List<List<node>> graph;
+	
+	static class node{
+		int a;
+		int w;
+		
+		node(int a, int w){
+			this.a = a;
+			this.w = w;
+		}
+	}
+	
+	static void dijkstra(int st) {
+		PriorityQueue<node> pq = new PriorityQueue<>(
+				(o1, o2) -> o1.w - o2.w
+		);
+		
+		pq.add(new node(st, 0));
+		dist[st] = 0;
+		
+		while(!pq.isEmpty()) {
+			node cur = pq.poll();
+			
+			if(cur.a == end) return;
+			
+			for(node nxt : graph.get(cur.a)) {
+				if(dist[nxt.a] <= dist[cur.a] + nxt.w) continue;
+				dist[nxt.a] = dist[cur.a] + nxt.w;
+				pq.add(new node(nxt.a, dist[nxt.a]));
+			}
+		}
+				
+	}
+	
+	public static void main(String[] args)throws IOException {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		N = Integer.parseInt(br.readLine());
+		M = Integer.parseInt(br.readLine());
+		
+		dist = new int[N+1];
+		Arrays.fill(dist, Integer.MAX_VALUE);
+		
+		graph = new ArrayList<>(N+1);
+		for(int i=0; i<=N; i++) {
+			graph.add(new ArrayList<>());
+		}
+		
+		StringTokenizer st;
+		
+		for(int i=0; i<M; i++) {
+			st = new StringTokenizer(br.readLine());
+			int a = Integer.parseInt(st.nextToken());
+			int b = Integer.parseInt(st.nextToken());
+			int w = Integer.parseInt(st.nextToken());
+			
+			graph.get(a).add(new node(b,w));
+		}
+		
+		st = new StringTokenizer(br.readLine());
+		start = Integer.parseInt(st.nextToken());
+		end = Integer.parseInt(st.nextToken());
+		
+		dijkstra(start);
+		System.out.print(dist[end]);
+	}
 }
