@@ -8,7 +8,7 @@
 
 ### 구분
 
-코딩테스트 연습 > 2020 KAKAO BLIND RECRUITMENT
+코딩테스트 연습 > 2020 KAKAO BLIND RECRUITMENT/문자열 압축
 
 ### 채점결과
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2025년 09월 30일 15:08:14
+2025년 09월 30일 15:08:23
 
 ### 문제 설명
 
@@ -25,19 +25,19 @@
 
 <p class="default_cursor_land">예를 들어, "ababcdcdababcdcd"의 경우 문자를 1개 단위로 자르면 전혀 압축되지 않지만, 2개 단위로 잘라서 압축한다면 "2ab2cd2ab2cd"로 표현할 수 있습니다. 다른 방법으로 8개 단위로 잘라서 압축한다면 "2ababcdcd"로 표현할 수 있으며, 이때가 가장 짧게 압축하여 표현할 수 있는 방법입니다.</p>
 
-<p>다른 예로, "abcabcdede"와 같은 경우, 문자를 2개 단위로 잘라서 압축하면 "abcabc2de"가 되지만, 3개 단위로 자른다면 "2abcdede"가 되어 3개 단위가 가장 짧은 압축 방법이 됩니다. 이때 3개 단위로 자르고 마지막에 남는 문자열은 그대로 붙여주면 됩니다.</p>
+<p class="default_cursor_land">다른 예로, "abcabcdede"와 같은 경우, 문자를 2개 단위로 잘라서 압축하면 "abcabc2de"가 되지만, 3개 단위로 자른다면 "2abcdede"가 되어 3개 단위가 가장 짧은 압축 방법이 됩니다. 이때 3개 단위로 자르고 마지막에 남는 문자열은 그대로 붙여주면 됩니다.</p>
 
 <p class="default_cursor_land">압축할 문자열 s가 매개변수로 주어질 때, 위에 설명한 방법으로 1개 이상 단위로 문자열을 잘라 압축하여 표현한 문자열 중 가장 짧은 것의 길이를 return 하도록 solution 함수를 완성해주세요.</p>
 
-<h3>제한사항</h3>
+<h3 class="default_cursor_land">제한사항</h3>
 
-<ul>
-<li>s의 길이는 1 이상 1,000 이하입니다.</li>
-<li>s는 알파벳 소문자로만 이루어져 있습니다.</li>
+<ul class="default_cursor_land">
+<li class="default_cursor_land">s의 길이는 1 이상 1,000 이하입니다.</li>
+<li class="default_cursor_land">s는 알파벳 소문자로만 이루어져 있습니다.</li>
 </ul>
 
 <h5>입출력 예</h5>
-<table class="table">
+<table class="table default_cursor_land">
         <thead><tr>
 <th>s</th>
 <th>result</th>
@@ -49,33 +49,33 @@
 </tr>
 <tr>
 <td><code>"ababcdcdababcdcd"</code></td>
-<td>9</td>
+<td class="default_cursor_land">9</td>
 </tr>
 <tr>
-<td><code>"abcabcdede"</code></td>
-<td>8</td>
+<td class="default_cursor_land"><code>"abcabcdede"</code></td>
+<td class="default_cursor_land">8</td>
 </tr>
 <tr>
-<td><code>"abcabcabcabcdededededede"</code></td>
+<td class="default_cursor_land"><code class="default_cursor_land">"abcabcabcabcdededededede"</code></td>
 <td>14</td>
 </tr>
 <tr>
-<td><code>"xababcdcdababcdcd"</code></td>
-<td>17</td>
+<td class="default_cursor_land"><code class="default_cursor_land">"xababcdcdababcdcd"</code></td>
+<td class="default_cursor_land">17</td>
 </tr>
 </tbody>
       </table>
-<h3>입출력 예에 대한 설명</h3>
+<h3 class="default_cursor_land">입출력 예에 대한 설명</h3>
 
-<p><strong>입출력 예 #1</strong></p>
+<p class="default_cursor_land"><strong>입출력 예 #1</strong></p>
 
-<p>문자열을 1개 단위로 잘라 압축했을 때 가장 짧습니다.</p>
+<p class="default_cursor_land">문자열을 1개 단위로 잘라 압축했을 때 가장 짧습니다.</p>
 
 <p><strong>입출력 예 #2</strong></p>
 
 <p>문자열을 8개 단위로 잘라 압축했을 때 가장 짧습니다.</p>
 
-<p class="default_cursor_land"><strong>입출력 예 #3</strong></p>
+<p><strong>입출력 예 #3</strong></p>
 
 <p>문자열을 3개 단위로 잘라 압축했을 때 가장 짧습니다.</p>
 
