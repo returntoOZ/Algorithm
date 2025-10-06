@@ -4,7 +4,7 @@ import java.util.*;
 public class Main {
     static int L, C;
     static char[] arr;
-    static StringBuilder sb;
+    static StringBuilder sb, out;
     public static void main(String[] args)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         StringTokenizer st = new StringTokenizer(br.readLine());
@@ -12,7 +12,7 @@ public class Main {
         L = Integer.parseInt(st.nextToken());
         C = Integer.parseInt(st.nextToken());
         arr = new char[C];
-        sb = new StringBuilder();
+        sb = new StringBuilder(); out = new StringBuilder();
 
         st = new StringTokenizer(br.readLine());
         for(int i=0; i<C; i++){
@@ -20,11 +20,12 @@ public class Main {
         }
         Arrays.sort(arr);
         dfs(0, -1, 0, 0);
+        System.out.print(out);
     }
 
     static void dfs(int cur, int prev, int mo, int ja){ // cur : 현재 갯수, prev : 이전 idx
         if(cur == L){
-            if(mo >= 1 && ja >= 2) System.out.println(sb);
+            if(mo >= 1 && ja >= 2) out.append(sb).append("\n");
             return;
         }
 
