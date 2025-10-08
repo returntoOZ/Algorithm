@@ -7,31 +7,33 @@ public class Main {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         N = Integer.parseInt(br.readLine());
-        HashMap<String, Integer> map = new HashMap<>();
         ArrayDeque<String>[] q = new ArrayDeque[N];
 
         for(int i=0; i<N; i++){
-            String[] arr = br.readLine().split(" ");
+            StringTokenizer st = new StringTokenizer(br.readLine());
             q[i] = new ArrayDeque<>();
-            for(int j=0; j<arr.length; j++){
-                q[i].offer(arr[j]);
-                map.put(arr[j], map.getOrDefault(arr[j], 0) + 1);
-            }
+            while(st.hasMoreTokens()) q[i].offer(st.nextToken());
         }
 
-        String[] cmp = br.readLine().split(" ");
-        for(int i=0; i<cmp.length; i++){
-            map.put(cmp[i], map.getOrDefault(cmp[i], 0) - 1);
-            if(map.get(cmp[i]) == -1){
-                System.out.print("Impossible");
-                return;
-            }
-            for(int j=0; j<N; j++){
-                if(q[j].isEmpty()) continue;
-                if(q[j].peek().equals(cmp[i])) {
-                    q[j].poll();
+        StringTokenizer st = new StringTokenizer(br.readLine());
+
+
+        while(st.hasMoreTokens()) {
+            String cur = st.nextToken();
+            boolean flag = true;
+
+            for(int i=0; i<N; i++){
+                if(q[i].isEmpty()) continue;
+                if(q[i].peek().equals(cur)) {
+                    q[i].poll();
+                    flag = false;
                     break;
                 }
+            }
+
+            if(flag){
+                System.out.print("Impossible");
+                return;
             }
         }
 
