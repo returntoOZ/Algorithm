@@ -3,60 +3,42 @@ import java.io.*;
 
 public class Main {
     static class node{
-        int x;
-        int y;
-
-        node(int x, int y){
-            this.x = x;
-            this.y = y;
-        }
+        int x, y;
+        node(int x, int y){ this.x = x; this.y = y; }
     }
+
     static boolean solved = false;
-    static int cnt = 0;
     static int[][] arr = new int[9][9];
+    static List<node> list = new ArrayList<>();
+    static boolean[][] rowUsed = new boolean[9][10];
+    static boolean[][] colUsed = new boolean[9][10];
+    static boolean[][] boxUsed = new boolean[9][10];
 
     public static void main(String[] args)throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        ArrayDeque<node> q = new ArrayDeque<>();
         for(int i=0; i<9; i++){
             StringTokenizer st = new StringTokenizer(br.readLine());
             for(int j=0; j<9; j++){
                 arr[i][j] = Integer.parseInt(st.nextToken());
-                if(arr[i][j] == 0){
-                    cnt++; q.offer(new node(i,j));
+                int v = arr[i][j];
+                if(v == 0){
+                    list.add(new node(i,j));
+                }else{
+                    rowUsed[i][v] = true;
+                    colUsed[j][v] = true;
+                    int zone = (i/3) * 3 + (j/3);
+                    boxUsed[zone][v] = true;
                 }
             }
         }
 
-        node[] point = new node[cnt];
-        for(int i=0; i<cnt; i++){
-            point[i] = q.poll();
-        }
-
-        sudoku(0, point);
+        sudoku(0);
     }
 
-    static node zone(int x, int y){
-        if(x>=0 && x<=2){
-            if(y>=0 && y<=2) return new node(0,0);
-            else if(y>2 && y<=5) return new node(0,3);
-            else return new node(0,6);
-        }else if(x>2 && x<=5){
-            if(y>=0 && y<=2) return new node(3,0);
-            else if(y>2 && y<=5) return new node(3,3);
-            else return new node(3,6);
-        }else{
-            if(y>=0 && y<=2) return new node(6,0);
-            else if(y>2 && y<=5) return new node(6,3);
-            else return new node(6,6);
-        }
-    }
-
-    static void sudoku(int cur, node[] p){
+    static void sudoku(int cur){
         if(solved) return;
-        if(cur == cnt){
+        if(cur == list.size()){
             StringBuilder sb = new StringBuilder();
-
             for(int i=0; i<9; i++){
                 for(int j=0; j<9; j++){
                     sb.append(arr[i][j]).append(' ');
@@ -68,41 +50,21 @@ public class Main {
             return;
         }
 
-        node n = p[cur];
-        int x = n.x;
-        int y = n.y;
-
-        boolean[] avil = new boolean[10];
-
-        // 1. 가로줄 서치
-        for(int i=0; i<9; i++){
-            int v = arr[x][i];
-            if(v==0) continue;
-            avil[v] = true;
-        }
-
-        // 2. 세로줄 서치
-        for(int i=0; i<9; i++){
-            int v = arr[i][y];
-            if(v==0) continue;
-            avil[v] = true;
-        }
-
-        // 3. 3*3 서치
-        node k = zone(x,y);
-        for(int i=0; i<3; i++){
-            for(int j=0; j<3; j++){
-                int v = arr[k.x + i][k.y + j];
-                if(v==0) continue;
-                avil[v] = true;
-            }
-        }
+        node n = list.get(cur);
+        int x = n.x, y = n.y;
+        int box = (x/3)*3 + (y/3);
 
         for(int i=1; i<=9; i++){
-            if(avil[i]) continue;
+            if(rowUsed[x][i] || colUsed[y][i] || boxUsed[box][i]) continue;
+
             arr[x][y] = i;
-            sudoku(cur+1, p);
+            rowUsed[x][i] = colUsed[y][i] = boxUsed[box][i] = true;
+
+            sudoku(cur+1);
+            if(solved) return;
+
             arr[x][y] = 0;
+            rowUsed[x][i] = colUsed[y][i] = boxUsed[box][i] = false;
         }
     }
 }
